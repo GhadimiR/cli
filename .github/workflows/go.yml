@@ -19,6 +19,9 @@ jobs:
           mkdir D:\workspace
           xcopy /E /H /C /I . D:\workspace
           cd D:\workspace
+          mkdir D:\workspace\runner_temp
+          set RUNNER_TEMP=D:\workspace\runner_temp
+
       - name: Check out code
         uses: actions/checkout@v4
 
@@ -27,6 +30,9 @@ jobs:
         with:
           go-version-file: "go.mod"
           cache: false
+
+      - name: Print RUNNER_TEMP environment variable
+        run: echo "RUNNER_TEMP is $RUNNER_TEMP"
 
       - name: Download dependencies
         run: go mod download

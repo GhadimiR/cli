@@ -13,6 +13,7 @@ jobs:
     runs-on: ${{ matrix.os }}
     env:
       RUNNER_TEMP: ${{ startsWith(matrix.os, 'windows') && 'D:\\workspace\\runner_temp' || '' }}
+      GOTMPDIR: ${{ startsWith(matrix.os, 'windows') && 'D:\\workspace\\go_tmp' || '' }}
 
     steps:
       - name: Set working directory to D drive if Windows
@@ -22,7 +23,7 @@ jobs:
           xcopy /E /H /C /I . D:\workspace
           cd D:\workspace
           mkdir D:\workspace\runner_temp
-          set RUNNER_TEMP=D:\workspace\runner_temp
+          mkdir D:\workspace\go_tmp
 
       - name: Check out code
         uses: actions/checkout@v4

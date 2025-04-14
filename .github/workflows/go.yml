@@ -14,6 +14,8 @@ jobs:
     env:
       RUNNER_TEMP: ${{ startsWith(matrix.os, 'windows') && 'D:\\workspace\\runner_temp' || '' }}
       GOTMPDIR: ${{ startsWith(matrix.os, 'windows') && 'D:\\workspace\\go_tmp' || '' }}
+      GOMODCACHE: ${{ startsWith(matrix.os, 'windows') && 'D:\\workspace\\go_mod_cache' || '' }}
+      GOPATH: ${{ startsWith(matrix.os, 'windows') && 'D:\\workspace\\go_path' || '' }}
 
     steps:
       - name: Set working directory to D drive if Windows
@@ -24,6 +26,8 @@ jobs:
           cd D:\workspace
           mkdir D:\workspace\runner_temp
           mkdir D:\workspace\go_tmp
+          mkdir D:\workspace\go_mod_cache
+          mkdir D:\workspace\go_path
 
       - name: Check out code
         uses: actions/checkout@v4

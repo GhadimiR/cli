@@ -11,6 +11,8 @@ jobs:
       matrix:
         os: [ubuntu-latest, windows-latest, macos-latest]
     runs-on: ${{ matrix.os }}
+    env:
+      RUNNER_TEMP: ${{ startsWith(matrix.os, 'windows') && 'D:\\workspace\\runner_temp' || '' }}
 
     steps:
       - name: Set working directory to D drive if Windows

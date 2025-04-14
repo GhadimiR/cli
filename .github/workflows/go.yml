@@ -13,6 +13,12 @@ jobs:
     runs-on: ${{ matrix.os }}
 
     steps:
+      - name: Set working directory to D drive if Windows
+        if: startsWith(runner.os, 'Windows')
+        run: |
+          mkdir D:\workspace
+          xcopy /E /H /C /I . D:\workspace
+          cd D:\workspace
       - name: Check out code
         uses: actions/checkout@v4
 

@@ -47,12 +47,14 @@ jobs:
         env:
           GOMODCACHE: ${{ startsWith(matrix.os, 'windows') && 'D:\\workspace\\go_mod_cache' || '' }}
           GOPATH: ${{ startsWith(matrix.os, 'windows') && 'D:\\workspace\\go_path' || '' }}
+          GOTMPDIR: ${{ startsWith(matrix.os, 'windows') && 'D:\\workspace\\go_tmp' || '' }}
 
       - name: Run unit and integration tests
         run: go test -race -tags=integration ./...
         env:
           GOMODCACHE: ${{ startsWith(matrix.os, 'windows') && 'D:\\workspace\\go_mod_cache' || '' }}
           GOPATH: ${{ startsWith(matrix.os, 'windows') && 'D:\\workspace\\go_path' || '' }}
+          GOTMPDIR: ${{ startsWith(matrix.os, 'windows') && 'D:\\workspace\\go_tmp' || '' }}
 
       - name: Build
         run: go build -v ./cmd/gh

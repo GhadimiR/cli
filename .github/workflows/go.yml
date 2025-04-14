@@ -43,9 +43,15 @@ jobs:
 
       - name: Download dependencies
         run: go mod download
+        env:
+          GOMODCACHE: ${{ startsWith(matrix.os, 'windows') && 'D:\\workspace\\go_mod_cache' || '' }}
+          GOPATH: ${{ startsWith(matrix.os, 'windows') && 'D:\\workspace\\go_path' || '' }}
 
       - name: Run unit and integration tests
         run: go test -race -tags=integration ./...
+        env:
+          GOMODCACHE: ${{ startsWith(matrix.os, 'windows') && 'D:\\workspace\\go_mod_cache' || '' }}
+          GOPATH: ${{ startsWith(matrix.os, 'windows') && 'D:\\workspace\\go_path' || '' }}
 
       - name: Build
         run: go build -v ./cmd/gh
